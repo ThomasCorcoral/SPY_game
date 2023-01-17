@@ -60,6 +60,10 @@ public class TitleScreenSystem : FSystem {
 
 	protected override void onStart()
 	{
+		
+		PlayerPrefs.SetInt("ice",0);
+		PlayerPrefs.SetInt("lava",0);
+
 		if (!GameObject.Find("GameData"))
 		{
 			gameData = UnityEngine.Object.Instantiate(prefabGameData);

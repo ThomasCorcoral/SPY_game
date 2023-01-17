@@ -3,7 +3,7 @@
   <map>
     <line><cell value="-1" /><cell value= "1" /><cell value= "1" /><cell value= "1" /><cell value="-1" /></line>
     <line><cell value="-1" /><cell value= "0" /><cell value= "3" /><cell value= "1" /><cell value="-1" /></line>
-    <line><cell value= "1" /><cell value= "1" /><cell value= "0" /><cell value= "1" /><cell value= "1" /></line>
+    <line><cell value= "1" /><cell value= "0" /><cell value= "0" /><cell value= "1" /><cell value= "1" /></line>
     <line><cell value= "1" /><cell value= "0" /><cell value= "0" /><cell value= "0" /><cell value= "1" /></line>
     <line><cell value= "1" /><cell value= "0" /><cell value= "2" /><cell value= "0" /><cell value= "1" /></line>
     <line><cell value= "1" /><cell value= "0" /><cell value= "0" /><cell value= "0" /><cell value= "1" /></line>
@@ -34,6 +34,7 @@
     <blockLimit blockType="Terminal" limit="0" />
     <blockLimit blockType="Exit" limit="0" />
   </blockLimits>
+  <lava posY='2' posX='2' />
   <door posY="5" posX="1" direction="0" slotId="0" />
   <door posY="5" posX="2" direction="0" slotId="0" />
   <door posY="5" posX="3" direction="0" slotId="0" />

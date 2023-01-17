@@ -18,7 +18,10 @@ public class BoutiqueManager : FSystem
     private GameData gameData;
     public GameObject shopPanel;
     public Transform skinsContent;
+    public Renderer robot;
+    public Text coinShow;
 
+    private UnityAction localCallback;
 	private Skins all_skins;
 	public GameObject prefabSkin; // Prefab de l'affichage d'un skin
 
@@ -29,6 +32,7 @@ public class BoutiqueManager : FSystem
 		public string logo;
         public int id;
 		public string name;
+        public int price;
 	}
 
 	[Serializable]
@@ -51,7 +55,16 @@ public class BoutiqueManager : FSystem
         GameObject go = GameObject.Find("GameData");
 		if (go != null)
 			gameData = go.GetComponent<GameData>();
+        set_current_skin();
     }
+
+    
+	protected override void onProcess(int familiesUpdateCount) {
+		//Debug.Log("Test");
+        int money = PlayerPrefs.GetInt("money", 0);
+        coinShow.text = money.ToString() + " coins";
+	}
+    
 
     // used on TitleScreen scene
 	public void loadPanelShop()
@@ -63,6 +76,9 @@ public class BoutiqueManager : FSystem
         all_skins = JsonUtility.FromJson<Skins>(data);
 
         foreach (Skin skin in all_skins.skins){
+            PlayerPrefs.SetString("SkinMaterial" + skin.id.ToString(), skin.path);
+            PlayerPrefs.SetInt("SkinPrice" + skin.id.ToString(), skin.price);
+
             GameObject s = UnityEngine.Object.Instantiate(prefabSkin, skinsContent);
             s.name = skin.name;
 
@@ -74,15 +90,57 @@ public class BoutiqueManager : FSystem
 
             Button bt = s.GetComponent<Button>();
         
-            bt.onClick.AddListener(() => { ChangeSkin(skin.id);});
+            bt.onClick.AddListener(() => { BuySkin(skin.id);});
 
             GameObjectManager.bind(s);
         }
     }
 
+    public void BuySkin(int i){
+
+        int money = PlayerPrefs.GetInt("money", 0);
+        int price = PlayerPrefs.GetInt("SkinPrice" + i.ToString(), 0);
+        int check_possessed = PlayerPrefs.GetInt("SkinBuyed" + i.ToString(), 0);
+
+        if(check_possessed == 1){
+            ChangeSkin(i);
+            localCallback = null;
+            GameObjectManager.addComponent<MessageForUser>(MainLoop.instance.gameObject, new { message = "Changement de skin effectué !", OkButton = "", CancelButton = "OK", call = localCallback });
+
+        }else if(price == 0){
+            ConfirmBuySkin(i, price, money);
+        }else if(money >= price){
+            localCallback = () => {ConfirmBuySkin(i, price, money);};
+            GameObjectManager.addComponent<MessageForUser>(MainLoop.instance.gameObject, new { message = "Es-tu sur de bien vouloir acheter ce skin pour " + price.ToString() + " pièces ?", OkButton = "OUI", CancelButton = "NON", call = localCallback });
+        }else{
+            localCallback = null;
+            GameObjectManager.addComponent<MessageForUser>(MainLoop.instance.gameObject, new { message = "Tu n'as pas assez d'argent pour acheter ce skin", OkButton = "", CancelButton = "OK", call = localCallback });
+        }
+    }
+
+    public void ConfirmBuySkin(int i, int price, int money){
+        
+        PlayerPrefs.SetInt("money", money-price);
+        PlayerPrefs.SetInt("SkinBuyed" + i.ToString(), 1);
+        //PlayerPrefs.Save();
+        ChangeSkin(i);
+
+        localCallback = null;
+        GameObjectManager.addComponent<MessageForUser>(MainLoop.instance.gameObject, new { message = "Félicitation, tu viens d'acheter un nouveau skin. Ce dernier vient d'être appliqué !", OkButton = "", CancelButton = "OK", call = localCallback });
+    }
+
     public void ChangeSkin(int i){
-        Debug.Log("Click : " + i.ToString());
+        //Debug.Log("Click : " + i.ToString());
         PlayerPrefs.SetInt("currentSkinIndex", i);
+        //PlayerPrefs.Save();
+        var skin = PlayerPrefs.GetString("SkinMaterial" + i, "Skins/Materials/Robot_Color");
+        robot.material = Resources.Load(skin, typeof(Material)) as Material;
+    }
+
+    public void set_current_skin(){
+        int current_skin = PlayerPrefs.GetInt("currentSkinIndex", 0);
+        var skin = PlayerPrefs.GetString("SkinMaterial" + current_skin, "Skins/Materials/Robot_Color");
+        robot.material = Resources.Load(skin, typeof(Material)) as Material;
     }
 
 }

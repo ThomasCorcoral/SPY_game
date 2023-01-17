@@ -15,6 +15,9 @@ TagManager:
   - Door
   - ResetButton
   - RemoveButton
+  - Lava
+  - Ice
+  - Robot2
   layers:
   - Default
   - TransparentFX
@@ -25,7 +28,7 @@ TagManager:
   - 
   - 
   - LevelFixed
-  - 
+  - Message
   - 
   - 
   - 

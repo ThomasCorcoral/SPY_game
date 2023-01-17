@@ -4,25 +4,29 @@
             "path": "Skins/Materials/Robot_Color",
             "logo": "Skins/Logos/basic",
             "id": 0,
-            "name": "Basic"
+            "name": "Basic",
+            "price": 0
         },
         {
             "path": "Skins/Materials/Robot_Color_Skin1",
             "logo": "Skins/Logos/ice",
             "id": 1,
-            "name": "Ice"
+            "name": "Ice",
+            "price": 100
         },
         {
             "path": "Skins/Materials/Robot_Color_Skin2",
             "logo": "Skins/Logos/lava",
             "id": 2,
-            "name": "Lava"
+            "name": "Lava",
+            "price": 100
         },
         {
             "path": "Skins/Materials/Robot_Color_Skin3",
             "logo": "Skins/Logos/yellow",
             "id": 3,
-            "name": "Yellow"
+            "name": "Yellow",
+            "price": 100
         }
     ]
 }

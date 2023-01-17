@@ -5,10 +5,16 @@ using FYFY;
 /// This system executes new currentActions
 /// </summary>
 public class CurrentActionExecutor : FSystem {
+
+	private Family f_ice = FamilyManager.getFamily(new AnyOfTags("Ice"));
+	private Family f_lava = FamilyManager.getFamily(new AnyOfTags("Lava"));
+
 	private Family f_wall = FamilyManager.getFamily(new AllOfComponents(typeof(Position)), new AnyOfTags("Wall", "Door"), new AnyOfProperties(PropertyMatcher.PROPERTY.ACTIVE_IN_HIERARCHY));
 	private Family f_activableConsole = FamilyManager.getFamily(new AllOfComponents(typeof(Activable),typeof(Position),typeof(AudioSource)));
     private Family f_newCurrentAction = FamilyManager.getFamily(new AllOfComponents(typeof(CurrentAction), typeof(BasicAction)));
 	private Family f_player = FamilyManager.getFamily(new AllOfComponents(typeof(ScriptRef)), new AnyOfTags("Player"));
+
+	private bool check_turn = false;
 
 	protected override void onStart()
 	{
@@ -68,40 +74,47 @@ public class CurrentActionExecutor : FSystem {
 	}
 
 	private void ApplyForward(GameObject go){
+
+		check_turn = false;
+
+		int x = go.GetComponent<Position>().x;
+		int y = go.GetComponent<Position>().y;
+
 		switch (go.GetComponent<Direction>().direction){
 			case Direction.Dir.North:
-				if (!checkObstacle(go.GetComponent<Position>().x, go.GetComponent<Position>().y - 1))
-				{
-					go.GetComponent<Position>().x = go.GetComponent<Position>().x;
-					go.GetComponent<Position>().y = go.GetComponent<Position>().y - 1;
+				y = y - 1;
+				while(onIce(x,y) && !checkObstacle(x, y-1)){
+					y = y-1;
 				}
-				else
-					GameObjectManager.addComponent<ForceMoveAnimation>(go);
 				break;
 			case Direction.Dir.South:
-				if(!checkObstacle(go.GetComponent<Position>().x,go.GetComponent<Position>().y + 1)){
-					go.GetComponent<Position>().x = go.GetComponent<Position>().x;
-					go.GetComponent<Position>().y = go.GetComponent<Position>().y + 1;
+				y = y + 1;
+				while(onIce(x,y) && !checkObstacle(x, y+1)){
+					y = y+1;
 				}
-				else
-					GameObjectManager.addComponent<ForceMoveAnimation>(go);
 				break;
 			case Direction.Dir.East:
-				if(!checkObstacle(go.GetComponent<Position>().x + 1, go.GetComponent<Position>().y)){
-					go.GetComponent<Position>().x = go.GetComponent<Position>().x + 1;
-					go.GetComponent<Position>().y = go.GetComponent<Position>().y;
+				x = x + 1;
+				while(onIce(x,y) && !checkObstacle(x+1, y)){
+					x = x + 1;
 				}
-				else
-					GameObjectManager.addComponent<ForceMoveAnimation>(go);
 				break;
 			case Direction.Dir.West:
-				if(!checkObstacle(go.GetComponent<Position>().x - 1, go.GetComponent<Position>().y)){
-					go.GetComponent<Position>().x = go.GetComponent<Position>().x - 1;
-					go.GetComponent<Position>().y = go.GetComponent<Position>().y;
+				x = x - 1;
+				while(onIce(x,y) && !checkObstacle(x-1, y)){
+					x = x - 1;
 				}
-				else
-					GameObjectManager.addComponent<ForceMoveAnimation>(go);
 				break;
+		}
+
+		if(!(checkObstacle(x, y) || onLava(x, y))){
+			go.GetComponent<Position>().x = x;
+			go.GetComponent<Position>().y = y;
+		}
+		else if(onLava(x, y)){
+			go.GetComponent<Position>().x = x;
+			go.GetComponent<Position>().y = y;
+			GameObjectManager.addComponent<NewEnd>(MainLoop.instance.gameObject, new { endType = NewEnd.Lava });
 		}
 	}
 
@@ -161,6 +174,44 @@ public class CurrentActionExecutor : FSystem {
 			if(go.GetComponent<Position>().x == x && go.GetComponent<Position>().y == z)
 				return true;
 		}
+		return false;
+	}
+
+	private bool onIce(int x, int y){
+		// On ignore la glace si l'utilisateur a le skin bleu
+		if(PlayerPrefs.GetInt("currentSkinIndex", 0) == 1)
+			return false;
+		foreach( GameObject go in f_ice){
+			//Debug.Log("ICE : (" + go.GetComponent<Position>().x.ToString() + ", " + go.GetComponent<Position>().y.ToString() + ")");
+			if(go.GetComponent<Position>().x == x && go.GetComponent<Position>().y == y){
+				PlayerPrefs.SetInt("ice",1);
+				check_turn = true;
+				return true;
+			}
+		}
+		if(check_turn == false)
+			PlayerPrefs.SetInt("ice",0);
+		return false;
+	}
+
+	private bool onLava(int x, int y){
+		// On ignore la lave si l'utilisateur a le skin de feu
+		// Debug.Log("Check Lava 1");
+		int actual_skin = PlayerPrefs.GetInt("currentSkinIndex", 0);
+		if(actual_skin == 2)
+			return false;
+
+		foreach( GameObject go in f_lava){
+			//Debug.Log("LAVA : (" + go.GetComponent<Position>().x.ToString() + ", " + go.GetComponent<Position>().y.ToString() + ")");
+			if(go.GetComponent<Position>().x == x && go.GetComponent<Position>().y == y){
+				PlayerPrefs.SetInt("lava",1);
+				check_turn = true;
+				return true;
+			}
+		}
+		
+		if(check_turn == false)
+			PlayerPrefs.SetInt("lava",0);
 		return false;
 	}
 }

@@ -2,7 +2,9 @@
 using FYFY;
 using System.Collections;
 using TMPro;
+using System;
 using System.IO;
+using System.Collections.Generic;
 
 /// <summary>
 /// This system check if the end of the level is reached and display end panel accordingly
@@ -94,6 +96,19 @@ public class EndGameManager : FSystem {
 	// Display panel with appropriate content depending on end
 	private void displayEndPanel(GameObject unused)
 	{
+
+		int scoredstars = 0;
+		/*
+		GameObjectManager.addComponent<ActionPerformedForLRS>(MainLoop.instance.gameObject, new
+        {
+            verb = "unlocked",
+            objectType = "progress",
+			activityExtensions = new Dictionary<string, string>() {
+                {"progress", read_current_player_coins().ToString()}
+            }
+        });
+		*/
+
 		// display end panel (we need immediate enabling)
 		endPanel.transform.parent.gameObject.SetActive(true);
 		// Get the first end that occurs
@@ -194,6 +209,19 @@ public class EndGameManager : FSystem {
 			endPanel.GetComponent<AudioSource>().loop = true;
 			endPanel.GetComponent<AudioSource>().Play();
 		}
+		else if (f_requireEndPanel.First().GetComponent<NewEnd>().endType == NewEnd.Lava)
+		{
+			Transform verticalCanvas = endPanel.transform.Find("VerticalCanvas");
+			GameObjectManager.setGameObjectState(verticalCanvas.Find("ScoreCanvas").gameObject, false);
+			verticalCanvas.GetComponentInChildren<TextMeshProUGUI>().text = "Aïe aïe aïe je crois que tu viens d'avoir un coup de chaud \nEssaye de changer de skin ;) !";
+			GameObjectManager.setGameObjectState(endPanel.transform.Find("ReloadLevel").gameObject, true);
+			GameObjectManager.setGameObjectState(endPanel.transform.Find("ReloadState").gameObject, true);
+			GameObjectManager.setGameObjectState(endPanel.transform.Find("MainMenu").gameObject, true);
+			GameObjectManager.setGameObjectState(endPanel.transform.Find("NextLevel").gameObject, false);
+			endPanel.GetComponent<AudioSource>().clip = Resources.Load("Sound/LoseSound") as AudioClip;
+			endPanel.GetComponent<AudioSource>().loop = true;
+			endPanel.GetComponent<AudioSource>().Play();
+		}
 	}
 
 	// Gére le nombre d'étoile à afficher selon le score obtenue
@@ -231,6 +259,9 @@ public class EndGameManager : FSystem {
 		int savedScore = PlayerPrefs.GetInt(gameData.levelToLoad + gameData.scoreKey, 0);
 		if (savedScore < scoredStars)
 		{
+			int money = PlayerPrefs.GetInt("money", 0);
+			PlayerPrefs.SetInt("money", money + (scoredStars-savedScore)*10);
+
 			PlayerPrefs.SetInt(gameData.levelToLoad + gameData.scoreKey, scoredStars);
 			PlayerPrefs.Save();
 		}
