@@ -61,18 +61,16 @@ public class BoutiqueManager : FSystem
         string data = File.ReadAllText(skinsPath);
 
         all_skins = JsonUtility.FromJson<Skins>(data);
-        
+
         foreach (Skin skin in all_skins.skins){
             GameObject s = UnityEngine.Object.Instantiate(prefabSkin, skinsContent);
             s.name = skin.name;
 
             Image theImage = s.GetComponent<Image>();
 
-            var sp = Resources.Load(Application.dataPath + "/" + skin.logo) as Sprite;
+            var current = Resources.Load(skin.logo, typeof(Sprite)) as Sprite;
 
-            Debug.Log(Application.dataPath + "/" + skin.logo);
-
-            theImage.sprite = sp;
+            theImage.sprite = current;
 
             Button bt = s.GetComponent<Button>();
         
