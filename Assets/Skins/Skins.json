@@ -1,0 +1,28 @@
+{
+    "skins": [
+        {
+            "path": "Skins/Materials/Robot_Color.mat",
+            "logo": "Skins/Logos/basic.png",
+            "id": 0,
+            "name": "Basic"
+        },
+        {
+            "path": "Skins/Materials/Robot_Color_Skin1.mat",
+            "logo": "Skins/Logos/ice.png",
+            "id": 1,
+            "name": "Ice"
+        },
+        {
+            "path": "Skins/Materials/Robot_Color_Skin2.mat",
+            "logo": "Skins/Logos/lava.png",
+            "id": 2,
+            "name": "Lava"
+        },
+        {
+            "path": "Skins/Materials/Robot_Color_Skin3.mat",
+            "logo": "Skins/Logos/yellow.png",
+            "id": 3,
+            "name": "Yellow"
+        }
+    ]
+}
