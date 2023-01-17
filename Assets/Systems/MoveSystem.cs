@@ -124,6 +124,8 @@ public class MoveSystem : FSystem {
 					// Stop moving
 					go.GetComponent<Animator>().SetFloat("Walk", -1f);
 					go.GetComponent<Animator>().SetFloat("Run", -1f);
+					go.GetComponent<Animator>().SetFloat("Slide", -1f);
+					go.GetComponent<Animator>().SetFloat("Burn", -1f);
 				}
 			}
 

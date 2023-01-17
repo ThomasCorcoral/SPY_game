@@ -17871,6 +17871,7 @@ GameObject:
   - component: {fileID: 1645587991}
   - component: {fileID: 1645587992}
   - component: {fileID: 1645587993}
+  - component: {fileID: 1645587994}
   m_Layer: 0
   m_Name: Main_Loop
   m_TagString: Untagged
@@ -17949,6 +17950,10 @@ MonoBehaviour:
   - _typeAssemblyQualifiedName: BoutiqueManager, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
     _typeFullName: BoutiqueManager
+    _pause: 0
+  - _typeAssemblyQualifiedName: SendStatements, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    _typeFullName: SendStatements
     _pause: 0
   _lateUpdateSystemDescriptions: []
   _forceUpdateInspector: 0
@@ -18066,6 +18071,18 @@ MonoBehaviour:
   coinShow: {fileID: 816600526}
   prefabSkin: {fileID: 2429190319586456235, guid: 8a9a34426d8f3ff48bdfa4a0d267da73,
     type: 3}
+--- !u!114 &1645587994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645587984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e14ccc65f5134de49b17b1d7686ee854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1647196598 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5938326883108450776, guid: d8b86bf11d6316f439d36b197173508e,

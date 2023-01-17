@@ -11,6 +11,7 @@ using UnityEngine.Events;
 using System.Runtime.InteropServices;
 using System.Collections;
 using UnityEngine.Networking;
+using DIG.GBLXAPI;
 
 public class BoutiqueManager : FSystem
 {
@@ -135,6 +136,16 @@ public class BoutiqueManager : FSystem
         //PlayerPrefs.Save();
         var skin = PlayerPrefs.GetString("SkinMaterial" + i, "Skins/Materials/Robot_Color");
         robot.material = Resources.Load(skin, typeof(Material)) as Material;
+
+        GameObjectManager.addComponent<ActionPerformedForLRS>(MainLoop.instance.gameObject, new
+		{
+			verb = "interacted",
+			objectType = "item",
+			activityExtensions = new Dictionary<string, string>() {
+				{"action", i.ToString()}
+			}
+		});
+
     }
 
     public void set_current_skin(){

@@ -4,6 +4,7 @@ using System.Collections;
 using TMPro;
 using System;
 using System.IO;
+using DIG.GBLXAPI;
 using System.Collections.Generic;
 
 /// <summary>
@@ -97,17 +98,17 @@ public class EndGameManager : FSystem {
 	private void displayEndPanel(GameObject unused)
 	{
 
-		int scoredstars = 0;
-		/*
+		int player_score = 0;
+		
 		GameObjectManager.addComponent<ActionPerformedForLRS>(MainLoop.instance.gameObject, new
         {
             verb = "unlocked",
             objectType = "progress",
 			activityExtensions = new Dictionary<string, string>() {
-                {"progress", read_current_player_coins().ToString()}
+                {"progress", PlayerPrefs.GetInt("money", 0).ToString()}
             }
         });
-		*/
+		
 
 		// display end panel (we need immediate enabling)
 		endPanel.transform.parent.gameObject.SetActive(true);
@@ -131,7 +132,7 @@ public class EndGameManager : FSystem {
 			Transform verticalCanvas = endPanel.transform.Find("VerticalCanvas");
 			GameObjectManager.setGameObjectState(verticalCanvas.Find("ScoreCanvas").gameObject, true);
 			verticalCanvas.GetComponentInChildren<TextMeshProUGUI>().text = "Bravo vous avez gagné !\nScore: " + score;
-			setScoreStars(score, verticalCanvas.Find("ScoreCanvas"));
+			player_score = setScoreStars(score, verticalCanvas.Find("ScoreCanvas"));
 
 			endPanel.GetComponent<AudioSource>().clip = Resources.Load("Sound/VictorySound") as AudioClip;
 			endPanel.GetComponent<AudioSource>().loop = false;
@@ -222,10 +223,20 @@ public class EndGameManager : FSystem {
 			endPanel.GetComponent<AudioSource>().loop = true;
 			endPanel.GetComponent<AudioSource>().Play();
 		}
+
+		GameObjectManager.addComponent<ActionPerformedForLRS>(MainLoop.instance.gameObject, new
+		{
+			verb = "completed",
+			objectType = "level",
+			activityExtensions = new Dictionary<string, string>() {
+				{"grade", player_score.ToString()}
+			}
+		});
+
 	}
 
 	// Gére le nombre d'étoile à afficher selon le score obtenue
-	private void setScoreStars(int score, Transform scoreCanvas)
+	private int setScoreStars(int score, Transform scoreCanvas)
 	{
 		// Détermine le nombre d'étoile à afficher
 		int scoredStars = 0;
@@ -265,6 +276,8 @@ public class EndGameManager : FSystem {
 			PlayerPrefs.SetInt(gameData.levelToLoad + gameData.scoreKey, scoredStars);
 			PlayerPrefs.Save();
 		}
+
+		return scoredStars; 
 	}
 
 	// Cancel End (see ReloadState button in editor)

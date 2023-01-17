@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using FYFY;
+using DIG.GBLXAPI;
+using System.Collections.Generic;
 
 /// <summary>
 /// This system executes new currentActions
@@ -179,13 +181,24 @@ public class CurrentActionExecutor : FSystem {
 
 	private bool onIce(int x, int y){
 		// On ignore la glace si l'utilisateur a le skin bleu
-		if(PlayerPrefs.GetInt("currentSkinIndex", 0) == 1)
+		if(PlayerPrefs.GetInt("currentSkinIndex", 0) == 1){
+			GameObjectManager.addComponent<ActionPerformedForLRS>(MainLoop.instance.gameObject, new
+			{
+				verb = "interacted",
+				objectType = "area"
+			});
 			return false;
+		}
 		foreach( GameObject go in f_ice){
 			//Debug.Log("ICE : (" + go.GetComponent<Position>().x.ToString() + ", " + go.GetComponent<Position>().y.ToString() + ")");
 			if(go.GetComponent<Position>().x == x && go.GetComponent<Position>().y == y){
 				PlayerPrefs.SetInt("ice",1);
 				check_turn = true;
+				GameObjectManager.addComponent<ActionPerformedForLRS>(MainLoop.instance.gameObject, new
+				{
+					verb = "interacted",
+					objectType = "area"
+				});
 				return true;
 			}
 		}
@@ -198,14 +211,27 @@ public class CurrentActionExecutor : FSystem {
 		// On ignore la lave si l'utilisateur a le skin de feu
 		// Debug.Log("Check Lava 1");
 		int actual_skin = PlayerPrefs.GetInt("currentSkinIndex", 0);
-		if(actual_skin == 2)
+		if(actual_skin == 2){
+			GameObjectManager.addComponent<ActionPerformedForLRS>(MainLoop.instance.gameObject, new
+			{
+				verb = "interacted",
+				objectType = "menu"
+			});
 			return false;
-
+		}
 		foreach( GameObject go in f_lava){
 			//Debug.Log("LAVA : (" + go.GetComponent<Position>().x.ToString() + ", " + go.GetComponent<Position>().y.ToString() + ")");
 			if(go.GetComponent<Position>().x == x && go.GetComponent<Position>().y == y){
 				PlayerPrefs.SetInt("lava",1);
 				check_turn = true;
+				GameObjectManager.addComponent<ActionPerformedForLRS>(MainLoop.instance.gameObject, new
+				{
+					verb = "exited",
+					objectType = "level",
+					activityExtensions = new Dictionary<string, string>() {
+						{"domain","1"}
+					}
+				});
 				return true;
 			}
 		}

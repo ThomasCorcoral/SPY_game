@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using FYFY;
 using FYFY_plugins.TriggerManager;
+using DIG.GBLXAPI;
+using System.Collections.Generic;
 
 /// <summary>
 /// Manage detector areas
@@ -46,6 +48,16 @@ public class DetectorManager : FSystem {
 			foreach(GameObject target in trigger.Targets){
 				//Check if the player collide with a detection cell
 				if (target.GetComponent<Detector>() != null){
+
+                    GameObjectManager.addComponent<ActionPerformedForLRS>(MainLoop.instance.gameObject, new
+                    {
+                        verb = "exited",
+                        objectType = "level",
+                        activityExtensions = new Dictionary<string, string>() {
+                            {"domain","0"}
+                        }
+                    });
+
 					//end level
 					GameObjectManager.addComponent<NewEnd>(MainLoop.instance.gameObject, new { endType = NewEnd.Detected });
 				}
