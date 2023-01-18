@@ -5,28 +5,32 @@
             "logo": "Skins/Logos/basic",
             "id": 0,
             "name": "Basic",
-            "price": 0
+            "price": 0,
+            "description": "Ce skin est le skin de base. On pourrait aussi l'appeler le skin originel pour le rendre plus classe. Cependant il ne sert à rien."
         },
         {
             "path": "Skins/Materials/Robot_Color_Skin1",
             "logo": "Skins/Logos/ice",
             "id": 1,
             "name": "Ice",
-            "price": 100
+            "price": 90,
+            "description": "Les pationoires, ah quelle superbe invention pour aller plus vite... Mais quand on ne sait pas tourner cela peut poser problème. Grâce à ce skin vous ne subirez plus la glace. Vous serez la glace !"
         },
         {
             "path": "Skins/Materials/Robot_Color_Skin2",
             "logo": "Skins/Logos/lava",
             "id": 2,
             "name": "Lava",
-            "price": 100
+            "price": 350,
+            "description": "Vous avez pris la mauvaise habitude de prendre des coups de chaud ? N'hésitez pas à profiter de notre promotion sur ce fabuleur skin résistant à la chaleur. Il parrait qu'il a été confectionné sur un volcan."
         },
         {
             "path": "Skins/Materials/Robot_Color_Skin3",
             "logo": "Skins/Logos/yellow",
             "id": 3,
             "name": "Yellow",
-            "price": 100
+            "price": 600,
+            "description": "Le skin utltime! Son pouvoir électrisant fera des ravages! Les drones sont brouillés mais ils n'en ont pas conscience. Je peux vous assurer qu'avec cela, ils ne vous detecteront plus jamais."
         }
     ]
 }

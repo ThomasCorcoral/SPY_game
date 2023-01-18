@@ -34,6 +34,7 @@ public class BoutiqueManager : FSystem
         public int id;
 		public string name;
         public int price;
+        public string description;
 	}
 
 	[Serializable]
@@ -83,15 +84,20 @@ public class BoutiqueManager : FSystem
             GameObject s = UnityEngine.Object.Instantiate(prefabSkin, skinsContent);
             s.name = skin.name;
 
-            Image theImage = s.GetComponent<Image>();
-
+            GameObject b = s.transform.GetChild(0).gameObject;
+            Image theImage = b.GetComponent<Image>();
             var current = Resources.Load(skin.logo, typeof(Sprite)) as Sprite;
-
             theImage.sprite = current;
-
-            Button bt = s.GetComponent<Button>();
-        
+            Button bt = b.GetComponent<Button>();
             bt.onClick.AddListener(() => { BuySkin(skin.id);});
+
+            GameObject desc = s.transform.GetChild(1).gameObject;
+            Text t = desc.GetComponent<Text>();
+            t.text = skin.description;
+
+            GameObject p = s.transform.GetChild(3).gameObject;
+            Text pt = p.GetComponent<Text>();
+            pt.text = skin.price.ToString() + " coins";
 
             GameObjectManager.bind(s);
         }
