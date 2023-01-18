@@ -47,7 +47,8 @@ public class DetectorManager : FSystem {
 			Triggered3D trigger = robot.GetComponent<Triggered3D>();
 			foreach(GameObject target in trigger.Targets){
 				//Check if the player collide with a detection cell
-				if (target.GetComponent<Detector>() != null){
+                // Yellow skin deactivate detection unit
+				if (target.GetComponent<Detector>() != null && PlayerPrefs.GetInt("currentSkinIndex", 0) != 3){
 
                     GameObjectManager.addComponent<ActionPerformedForLRS>(MainLoop.instance.gameObject, new
                     {
