@@ -35,7 +35,7 @@
      <blockLimit blockType="Terminal" limit="0" />
      <blockLimit blockType="Exit" limit="0" />
  </blockLimits>
- <door posY="2" posX="7" direction="2" slotId="0" />
+ <door posY="2" posX="7" direction="0" slotId="0" />
  <console state="1" posY="3" posX="1" direction="0">
      <slot slotId="0" />
  </console>
@@ -68,5 +68,12 @@
  <player associatedScriptName="Karl" posY="7" posX="4" direction="0" />
  <script name="Karl" editMode="0"/>
  <enemy associatedScriptName="Guarde" posY="3" posX="4" direction="2" range="2" selfRange="False" typeRange="0" />
+ <script name="Guarde" editMode="0" type="0">
+    <forever>
+        <action type="Forward"/>
+        <action type="Forward"/>
+        <action type="TurnLeft"/>
+    </forever>
+ </script>
  <score twoStars="0" threeStars="0"/>
 </level>

@@ -49,5 +49,11 @@
  <player associatedScriptName="Karl" posY="5" posX="8" direction="3" />
  <script name="Karl" editMode="0"/>
  <enemy associatedScriptName="Guarde" posY="5" posX="1" direction="2" range="2" selfRange="True" typeRange="0" />
+ <script name="Guarde" editMode="0" type="0">
+    <forever>
+        <action type="TurnLeft"/>
+        <action type="Wait"/>
+    </forever>
+ </script>
  <score twoStars="0" threeStars="0"/>
 </level>
