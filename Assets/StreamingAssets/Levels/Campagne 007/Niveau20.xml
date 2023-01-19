@@ -53,9 +53,7 @@
  <lava posY='5' posX='4' />
  <player associatedScriptName="Karl" posY="6" posX="4" direction="0" />
  <script name="Karl" editMode="0"/>
- <player associatedScriptName="Bob" posY="1" posX="7" direction="0" />
- <script name="Bob" editMode="0">
-     <action type="Activate"/>
- <script/>
+ <player associatedScriptName="Bob" posY="1" posX="7" direction="3" />
+ <script name="Bob" editMode="0"/>
  <score twoStars="0" threeStars="0"/>
 </level>

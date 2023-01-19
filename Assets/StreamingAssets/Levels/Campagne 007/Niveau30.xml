@@ -82,7 +82,7 @@
         <action type="TurnLeft"/>
     </forever>
  </script>
- <enemy associatedScriptName="Guarde2" posY="1" posX="5" direction="2" range="1" selfRange="False" typeRange="0" />
+ <enemy associatedScriptName="Guarde2" posY="1" posX="5" direction="3" range="1" selfRange="False" typeRange="0" />
  <script name="Guarde2" editMode="0" type="0">
     <forever>
         <action type="Forward"/>
