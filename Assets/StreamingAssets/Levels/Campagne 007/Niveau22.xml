@@ -48,10 +48,10 @@
  <lava posY='4' posX='6' />
  <lava posY='4' posX='7' />
 
- <console state="1" posY="5" posX="1" direction="0">
+ <console state="1" posY="5" posX="3" direction="0">
      <slot slotId="0" />
  </console>
- <door posY="2" posX="7" direction="2" slotId="0" />
+ <door posY="2" posX="7" direction="0" slotId="0" />
  <player associatedScriptName="Karl" posY="7" posX="4" direction="0" />
  <script name="Karl" editMode="0"/>
  <score twoStars="0" threeStars="0"/>

@@ -35,14 +35,17 @@
      <blockLimit blockType="Terminal" limit="0" />
      <blockLimit blockType="Exit" limit="0" />
  </blockLimits>
- <lava posY='1' posX='6' />
- <lava posY='2' posX='2' />
- <lava posY='2' posX='3' />
- <lava posY='2' posX='6' />
- <door posY="2" posX="7" direction="2" slotId="0" />
+ 
+ <door posY="1" posX="6" direction="2" slotId="0" />
+ <door posY="2" posX="6" direction="2" slotId="0" />
  <console state="1" posY="3" posX="1" direction="0">
      <slot slotId="0" />
  </console>
+
+ <lava posY='1' posX='5' />
+ <lava posY='2' posX='2' />
+ <lava posY='2' posX='3' />
+ <lava posY='2' posX='6' />
  <lava posY='3' posX='2' />
  <lava posY='3' posX='3' />
  <lava posY='4' posX='2' />

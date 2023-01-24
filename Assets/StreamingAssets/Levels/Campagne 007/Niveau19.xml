@@ -1,14 +1,14 @@
 <?xml version='1.0'?>
 <level>
  <map>
-     <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/>  </line>
-     <line> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/>  </line>
-     <line> <cell value='1'/> <cell value='0'/> <cell value='1'/> <cell value='3'/> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/>  </line>
-     <line> <cell value='1'/> <cell value='0'/> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/>  </line>
-     <line> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='1'/>  </line>
-     <line> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='1'/> <cell value='0'/>  </line>
-     <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='0'/> <cell value='2'/> <cell value='1'/> <cell value='0'/>  </line>
-     <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/>  </line>
+     <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> </line>
+     <line> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='1'/> </line>
+     <line> <cell value='1'/> <cell value='0'/> <cell value='1'/> <cell value='3'/> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='1'/> </line>
+     <line> <cell value='1'/> <cell value='0'/> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='1'/> </line>
+     <line> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='1'/> <cell value='1'/> </line>
+     <line> <cell value='1'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='0'/> <cell value='1'/> <cell value='0'/> <cell value='1'/> </line>
+     <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='0'/> <cell value='2'/> <cell value='1'/> <cell value='0'/> <cell value='1'/> </line>
+     <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> </line>
  </map>
  <dialogs>
      <dialog text="[Version test] : niveau de test" />

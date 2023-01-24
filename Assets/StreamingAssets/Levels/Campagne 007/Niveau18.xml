@@ -39,11 +39,14 @@
  <lava posY='1' posX='2' />
  <lava posY='2' posX='1' />
  <lava posY='2' posX='4' />
- <door posY="2" posX="7" direction="2" slotId="0" />
  <lava posY='3' posX='3' />
  <lava posY='4' posX='2' />
  <lava posY='4' posX='4' />
  <lava posY='5' posX='1' />
+ <door posY="2" posX="7" direction="2" slotId="0" />
+ <door posY="3" posX="7" direction="2" slotId="0" />
+ <door posY="4" posX="7" direction="2" slotId="0" />
+ <door posY="5" posX="7" direction="2" slotId="0" />
  <player associatedScriptName="Karl" posY="6" posX="4" direction="0" />
  <script name="Karl" editMode="0"/>
  <score twoStars="0" threeStars="0"/>

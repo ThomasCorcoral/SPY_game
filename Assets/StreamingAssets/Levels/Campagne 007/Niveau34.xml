@@ -35,6 +35,7 @@
      <blockLimit blockType="Terminal" limit="0" />
      <blockLimit blockType="Exit" limit="0" />
  </blockLimits>
+ <door posY="1" posX="6" direction="2" slotId="0" />
  <door posY="2" posX="7" direction="0" slotId="0" />
  <console state="1" posY="3" posX="1" direction="0">
      <slot slotId="0" />
