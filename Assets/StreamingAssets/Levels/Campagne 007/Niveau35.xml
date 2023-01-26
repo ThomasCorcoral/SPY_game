@@ -12,7 +12,7 @@
      <line> <cell value='1'/> <cell value='2'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/>  </line>
  </map>
  <dialogs>
-     <dialog text="[Version test] : niveau de test" />
+     <dialog text="De la lumière sort de la sortie, mais attention de ne pas la confondre avec de la lave hahaha." />
  </dialogs>
  <blockLimits>
      <blockLimit blockType="Forward" limit="-1" />

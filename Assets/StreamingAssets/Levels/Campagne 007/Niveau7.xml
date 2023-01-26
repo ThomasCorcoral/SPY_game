@@ -11,7 +11,7 @@
      <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='2'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> </line>
  </map>
  <dialogs>
-     <dialog text="[Version test] : niveau de test" />
+     <dialog text="Beaucoup de personnes sont tombées et n'ont pas réussi à finir ce niveau. Y parviendriez-vous ?" />
  </dialogs>
  <blockLimits>
      <blockLimit blockType="Forward" limit="-1" />

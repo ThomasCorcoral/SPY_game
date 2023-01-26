@@ -11,7 +11,7 @@
      <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> </line>
  </map>
  <dialogs>
-     <dialog text="[Version test] : niveau de test" />
+     <dialog text="Ce drone semble avoir perdu la boule, la lave lui est monté à la tête, profitez-en !" />
  </dialogs>
  <blockLimits>
      <blockLimit blockType="Forward" limit="-1" />

@@ -11,7 +11,7 @@
      <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='2'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> </line>
  </map>
  <dialogs>
-     <dialog text="[Version test] : niveau de test" />
+     <dialog text="J'espère que vous n'avez pas oublié votre tenue sur le porte manteau, sinon ça va être compliqué ^^." />
  </dialogs>
  <blockLimits>
      <blockLimit blockType="Forward" limit="-1" />

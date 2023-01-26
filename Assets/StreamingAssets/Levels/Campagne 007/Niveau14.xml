@@ -11,7 +11,7 @@
      <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='2'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> </line>
  </map>
  <dialogs>
-     <dialog text="[Version test] : niveau de test" />
+     <dialog text="Les choses se compliquent, pour franchir ce niveau, gardez cela en tête : anticipation !" />
  </dialogs>
  <blockLimits>
      <blockLimit blockType="Forward" limit="-1" />

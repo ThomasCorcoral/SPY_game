@@ -11,7 +11,7 @@
      <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='2'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> </line>
  </map>
  <dialogs>
-     <dialog text="[Version test] : niveau de test" />
+     <dialog text="Vous n'étiez pas assez rapide lors du précédent niveau, le drone a repris ses fonctions, prenez garde !" />
  </dialogs>
  <blockLimits>
      <blockLimit blockType="Forward" limit="-1" />

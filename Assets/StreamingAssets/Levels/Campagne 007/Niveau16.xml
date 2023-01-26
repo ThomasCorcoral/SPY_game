@@ -11,7 +11,7 @@
      <line> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> <cell value='1'/> </line>
  </map>
  <dialogs>
-     <dialog text="[Version test] : niveau de test" />
+     <dialog text="L'air s'est réchauffé d'un seul coup ! Prenez garde, certaines plaques ont une température de plus de 700 °C." />
  </dialogs>
  <blockLimits>
      <blockLimit blockType="Forward" limit="-1" />
