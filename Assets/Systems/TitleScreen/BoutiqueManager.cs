@@ -91,13 +91,28 @@ public class BoutiqueManager : FSystem
             Button bt = b.GetComponent<Button>();
             bt.onClick.AddListener(() => { BuySkin(skin.id);});
 
+            GameObject im = s.transform.GetChild(2).gameObject;
+            Button bt2 = im.GetComponent<Button>();
+            bt2.onClick.AddListener(() => { BuySkin(skin.id);});
+
             GameObject desc = s.transform.GetChild(1).gameObject;
             Text t = desc.GetComponent<Text>();
             t.text = skin.description;
 
             GameObject p = s.transform.GetChild(3).gameObject;
             Text pt = p.GetComponent<Text>();
-            pt.text = skin.price.ToString() + " coins";
+            if(PlayerPrefs.GetInt("SkinBuyed" + skin.id.ToString(), 0) == 1){
+                pt.text = "Achete";
+            }else if(skin.price == 0){
+                PlayerPrefs.SetInt("SkinBuyed" + skin.id.ToString(), 1);
+                pt.text = "Achete";
+            }else{
+                pt.text = skin.price.ToString() + " coins";
+            }
+
+            
+            Button bt3 = p.GetComponent<Button>();
+            bt3.onClick.AddListener(() => { BuySkin(skin.id);});
 
             GameObjectManager.bind(s);
         }

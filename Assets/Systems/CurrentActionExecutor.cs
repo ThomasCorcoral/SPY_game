@@ -85,35 +85,35 @@ public class CurrentActionExecutor : FSystem {
 		switch (go.GetComponent<Direction>().direction){
 			case Direction.Dir.North:
 				y = y - 1;
-				while(onIce(x,y) && !checkObstacle(x, y-1)){
+				while(onIce(x, y, go) && !checkObstacle(x, y-1)){
 					y = y-1;
 				}
 				break;
 			case Direction.Dir.South:
 				y = y + 1;
-				while(onIce(x,y) && !checkObstacle(x, y+1)){
+				while(onIce(x, y, go) && !checkObstacle(x, y+1)){
 					y = y+1;
 				}
 				break;
 			case Direction.Dir.East:
 				x = x + 1;
-				while(onIce(x,y) && !checkObstacle(x+1, y)){
+				while(onIce(x, y, go) && !checkObstacle(x+1, y)){
 					x = x + 1;
 				}
 				break;
 			case Direction.Dir.West:
 				x = x - 1;
-				while(onIce(x,y) && !checkObstacle(x-1, y)){
+				while(onIce(x, y, go) && !checkObstacle(x-1, y)){
 					x = x - 1;
 				}
 				break;
 		}
 
-		if(!(checkObstacle(x, y) || onLava(x, y))){
+		if(!(checkObstacle(x, y) || onLava(x, y, go))){
 			go.GetComponent<Position>().x = x;
 			go.GetComponent<Position>().y = y;
 		}
-		else if(onLava(x, y)){
+		else if(onLava(x, y, go)){
 			go.GetComponent<Position>().x = x;
 			go.GetComponent<Position>().y = y;
 			GameObjectManager.addComponent<NewEnd>(MainLoop.instance.gameObject, new { endType = NewEnd.Lava });
@@ -179,7 +179,10 @@ public class CurrentActionExecutor : FSystem {
 		return false;
 	}
 
-	private bool onIce(int x, int y){
+	private bool onIce(int x, int y, GameObject gobj){
+		if(gobj.CompareTag("Drone")){
+			return false;
+		}
 		// On ignore la glace si l'utilisateur a le skin bleu
 		if(PlayerPrefs.GetInt("currentSkinIndex", 0) == 1){
 			GameObjectManager.addComponent<ActionPerformedForLRS>(MainLoop.instance.gameObject, new
@@ -207,7 +210,10 @@ public class CurrentActionExecutor : FSystem {
 		return false;
 	}
 
-	private bool onLava(int x, int y){
+	private bool onLava(int x, int y, GameObject gobj){
+		if(gobj.CompareTag("Drone")){
+			return false;
+		}
 		// On ignore la lave si l'utilisateur a le skin de feu
 		// Debug.Log("Check Lava 1");
 		int actual_skin = PlayerPrefs.GetInt("currentSkinIndex", 0);

@@ -281,7 +281,7 @@ public class TitleScreenSystem : FSystem {
 				button.GetComponentInChildren<Button>().interactable = true;
 			//unlocked levels
 			else
-				button.GetComponentInChildren<Button>().interactable = false;
+				button.GetComponentInChildren<Button>().interactable = true;
 			//scores
 			int scoredStars = PlayerPrefs.GetInt(levelKey + gameData.scoreKey, 0); //0 star by default
 			Transform scoreCanvas = button.transform.Find("ScoreCanvas");
