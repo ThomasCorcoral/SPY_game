@@ -72,49 +72,61 @@ public class BoutiqueManager : FSystem
 	public void loadPanelShop()
 	{
         string skinsPath = "Assets/Skins/Skins.json";
-		
         string data = File.ReadAllText(skinsPath);
-
         all_skins = JsonUtility.FromJson<Skins>(data);
+        if(PlayerPrefs.GetInt("boutiqueLoaded",0) == 0){
+            foreach (Skin skin in all_skins.skins){
+                PlayerPrefs.SetString("SkinMaterial" + skin.id.ToString(), skin.path);
+                PlayerPrefs.SetInt("SkinPrice" + skin.id.ToString(), skin.price);
 
-        foreach (Skin skin in all_skins.skins){
-            PlayerPrefs.SetString("SkinMaterial" + skin.id.ToString(), skin.path);
-            PlayerPrefs.SetInt("SkinPrice" + skin.id.ToString(), skin.price);
+                GameObject s = UnityEngine.Object.Instantiate(prefabSkin, skinsContent);
+                s.name = skin.name;
 
-            GameObject s = UnityEngine.Object.Instantiate(prefabSkin, skinsContent);
-            s.name = skin.name;
+                GameObject b = s.transform.GetChild(0).gameObject;
+                Image theImage = b.GetComponent<Image>();
+                var current = Resources.Load(skin.logo, typeof(Sprite)) as Sprite;
+                theImage.sprite = current;
+                Button bt = b.GetComponent<Button>();
+                bt.onClick.AddListener(() => { BuySkin(skin.id);});
 
-            GameObject b = s.transform.GetChild(0).gameObject;
-            Image theImage = b.GetComponent<Image>();
-            var current = Resources.Load(skin.logo, typeof(Sprite)) as Sprite;
-            theImage.sprite = current;
-            Button bt = b.GetComponent<Button>();
-            bt.onClick.AddListener(() => { BuySkin(skin.id);});
+                GameObject im = s.transform.GetChild(2).gameObject;
+                Button bt2 = im.GetComponent<Button>();
+                bt2.onClick.AddListener(() => { BuySkin(skin.id);});
 
-            GameObject im = s.transform.GetChild(2).gameObject;
-            Button bt2 = im.GetComponent<Button>();
-            bt2.onClick.AddListener(() => { BuySkin(skin.id);});
+                GameObject desc = s.transform.GetChild(1).gameObject;
+                Text t = desc.GetComponent<Text>();
+                t.text = skin.description;
 
-            GameObject desc = s.transform.GetChild(1).gameObject;
-            Text t = desc.GetComponent<Text>();
-            t.text = skin.description;
+                GameObject p = s.transform.GetChild(3).gameObject;
+                Text pt = p.GetComponent<Text>();
+                if(PlayerPrefs.GetInt("SkinBuyed" + skin.id.ToString(), 0) == 1){
+                    pt.text = "Achete";
+                }else if(skin.price == 0){
+                    PlayerPrefs.SetInt("SkinBuyed" + skin.id.ToString(), 1);
+                    pt.text = "Achete";
+                }else{
+                    pt.text = skin.price.ToString() + " coins";
+                }
 
-            GameObject p = s.transform.GetChild(3).gameObject;
-            Text pt = p.GetComponent<Text>();
-            if(PlayerPrefs.GetInt("SkinBuyed" + skin.id.ToString(), 0) == 1){
-                pt.text = "Achete";
-            }else if(skin.price == 0){
-                PlayerPrefs.SetInt("SkinBuyed" + skin.id.ToString(), 1);
-                pt.text = "Achete";
-            }else{
-                pt.text = skin.price.ToString() + " coins";
+                
+                Button bt3 = p.GetComponent<Button>();
+                bt3.onClick.AddListener(() => { BuySkin(skin.id);});
+
+                GameObjectManager.bind(s);
             }
-
-            
-            Button bt3 = p.GetComponent<Button>();
-            bt3.onClick.AddListener(() => { BuySkin(skin.id);});
-
-            GameObjectManager.bind(s);
+            PlayerPrefs.SetInt("boutiqueLoaded",1);
+        }else{
+            for(int i = 0; i < skinsContent.transform.childCount; i++){
+                GameObject current = skinsContent.transform.GetChild(i).gameObject;
+                GameObject p = current.transform.GetChild(3).gameObject;
+                Text pt = p.GetComponent<Text>();
+                if(PlayerPrefs.GetInt("SkinBuyed" + all_skins.skins[i].id.ToString(), 0) == 1){
+                    pt.text = "Achete";
+                }else if(all_skins.skins[i].price == 0){
+                    PlayerPrefs.SetInt("SkinBuyed" + all_skins.skins[i].id.ToString(), 1);
+                    pt.text = "Achete";
+                }
+            }
         }
     }
 
@@ -149,6 +161,12 @@ public class BoutiqueManager : FSystem
 
         localCallback = null;
         GameObjectManager.addComponent<MessageForUser>(MainLoop.instance.gameObject, new { message = "Félicitation, tu viens d'acheter un nouveau skin. Ce dernier vient d'être appliqué !", OkButton = "", CancelButton = "OK", call = localCallback });
+    
+        GameObject current = skinsContent.transform.GetChild(i).gameObject;
+        GameObject p = current.transform.GetChild(3).gameObject;
+        Text pt = p.GetComponent<Text>();
+        pt.text = "Achete";
+    
     }
 
     public void ChangeSkin(int i){
