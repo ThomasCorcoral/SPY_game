@@ -48,7 +48,7 @@
  <lava posY='4' posX='6' />
  <lava posY='4' posX='7' />
 
- <console state="1" posY="5" posX="1" direction="0">
+ <console state="1" posY="5" posX="1" direction="3">
      <slot slotId="0" />
  </console>
  <door posY="2" posX="7" direction="0" slotId="0" />
