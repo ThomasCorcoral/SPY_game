@@ -60,9 +60,13 @@ public class TitleScreenSystem : FSystem {
 
 	protected override void onStart()
 	{
-		
+		//PlayerPrefs.DeleteAll();
+		//PlayerPrefs.SetInt("money",1000);
+
 		PlayerPrefs.SetInt("ice",0);
 		PlayerPrefs.SetInt("lava",0);
+		PlayerPrefs.SetInt("boutiqueLoaded",0);
+		PlayerPrefs.SetInt("boutiqueLoadedGame",0);
 
 		if (!GameObject.Find("GameData"))
 		{
@@ -281,7 +285,7 @@ public class TitleScreenSystem : FSystem {
 				button.GetComponentInChildren<Button>().interactable = true;
 			//unlocked levels
 			else
-				button.GetComponentInChildren<Button>().interactable = true;
+				button.GetComponentInChildren<Button>().interactable = false;
 			//scores
 			int scoredStars = PlayerPrefs.GetInt(levelKey + gameData.scoreKey, 0); //0 star by default
 			Transform scoreCanvas = button.transform.Find("ScoreCanvas");
